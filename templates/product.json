@@ -17,6 +17,10 @@
             "custom_code": "<div style=\"display: flex; flex-direction: column; gap: 14px; align-items: flex-start; font-size: 15px; line-height: 1.4;\">\n                  <!-- 14 Tage kostenlose Rücksendung -->\n                  <div style=\"display: flex; align-items: center; gap: 10px;\">\n                    <img src=\"https://cdn.shopify.com/s/files/1/0903/0801/8561/files/STALLUXE_1500_x_1500_px_1.png?v=1752660417\" alt=\"Shipping Icon\" style=\"width: 20px; height: 20px;\">\n                    <span>30 days free return</span>\n                  </div>\n                  <!-- Kauf auf Rechnung mit Klarna -->\n                  <div style=\"display: flex; align-items: center; gap: 10px;\">\n                    <img src=\"https://cdn.shopify.com/s/files/1/0654/9028/8866/files/2_56504214-2075-45fd-ac85-96fc1472cb2c.png?v=1752311068\" alt=\"Klarna Icon\" style=\"width: 20px; height: 20px;\">\n                    <span>Purchase on account with Klarna</span>\n                  </div>\n                  <!-- Express Lieferung -->\n                  <div style=\"display: flex; align-items: center; gap: 10px;\">\n                    <img src=\"https://cdn.shopify.com/s/files/1/0654/9028/8866/files/3_1bb5c1ff-5c46-4147-b96c-ac361380aea8.png?v=1752311078\" alt=\"Express Icon\" style=\"width: 20px; height: 20px;\">\n                    <span>Express: 3 working days delivery time</span>\n                  </div>\n                </div>"
           }
         },
+        "subs": {
+          "type": "subscription",
+          "settings": {}
+        },
         "variant_selector": {
           "type": "variant_selector",
           "settings": {}
@@ -41,6 +45,7 @@
         "title",
         "price",
         "custom-html",
+        "subs",
         "variant_selector",
         "checkout_buttons",
         "accordions"

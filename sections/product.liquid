@@ -157,6 +157,10 @@
                     </div>
                   {% when '@app' %}
                       {% render block %}
+                  {% when 'subscription' %}
+                    <div class="subs-block">
+                      <div class="subscriptions_app_embed_block"></div>
+                    </div>
                 {% else %}
                   {% endcase %}
                 {% endfor %}
@@ -366,6 +370,10 @@
         {
           "type": "variant_selector",
           "name": "Variant Selector",
+          "limit": 1
+        },{
+          "type": "subscription",
+          "name": "Subscription",
           "limit": 1
         }, {
           "type": "description",
