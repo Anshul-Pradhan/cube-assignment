@@ -1,0 +1,115 @@
+<footer>
+  <div class="container-fluid">
+    <div class="footer-wrapper">
+      <div class="fw-upper">
+        <div class="fwu-left">
+          <p class="label">{{ section.settings.con_head }}</p>
+          <div class="fw-contact">
+            <p class="sm-label">{{ section.settings.con_email }}</p>
+            <a href="mailto:{{ section.settings.email }}">Email: {{ section.settings.email }}</a>
+          </div>
+          <div class="fw-contact">
+            <p class="sm-label">{{ section.settings.open_head }}</p>
+            <p class="fw-txt">
+              {{ section.settings.opening }}
+            </p>
+          </div>
+        </div>
+        <div class="fw-navs">
+          {% for block in section.blocks %}
+            {% assign menu = linklists[block.settings.menu_handle] %}
+            {% if menu.links.size > 0 %}
+              <div class="blocks">
+                <p class="label">{{ block.settings.heading }}</p>
+                {% for link in menu.links %}
+                  <a href="{{ link.url }}" class="footer_title">{{ link.title }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="fw-bottom">
+        <p class="label">© 2025, Stalluxe Fashion</p>
+        {% if section.settings.show_payment_icons %}
+          <div class="payment-icons">
+            {% for type in shop.enabled_payment_types %}
+              {{ type | payment_type_svg_tag }}
+            {% endfor %}
+          </div>
+        {% endif %}
+        <div class="footer-policies">
+          <a href="/policies/privacy-policy">Privacy Policy</a>
+          <div class="dot"></div>
+          <a href="/policies/refund-policy">Right of withdrawal</a>
+          <div class="dot"></div>
+          <a href="/policies/contact-information">Contact information</a>
+          <div class="dot"></div>
+          <a href="/policies/shipping-policy">Shipment</a>
+          <div class="dot"></div>
+          <a href="/policies/terms-of-service">Terms and Conditions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "text",
+        "id": "con_head",
+        "label": "Contact Heading",
+        "default": "Contact details"
+      },
+      {
+        "type": "text",
+        "id": "con_email",
+        "label": "Contact Email Heading",
+        "default": "Contact:"
+      },
+      {
+        "type": "text",
+        "id": "email",
+        "label": "Enter Mail Id",
+        "default": "info@stalluxe.com"
+      },
+      {
+        "type": "text",
+        "id": "open_head",
+        "label": "Opening Hours Heading",
+        "default": "Opening hours:"
+      }, {
+        "type": "textarea",
+        "id": "opening",
+        "label": "Opening Hours",
+        "default": "Monday - Friday: 09:30 - 18:00<br>Saturday: 12:00 - 17:00<br>Sunday: Closed"
+      }, {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "t:labels.show_payment_icons",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "menu_blocks",
+        "name": "Footer Menu Blocks",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "menu_handle",
+            "label": "Footer Menu"
+          }, {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

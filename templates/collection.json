@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "collection",
+      "settings": {}
+    },
+    "spacer": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 50
+      }
+    },
+    "newsletter": {
+      "type": "newsletter-section",
+      "settings": {
+        "head": "JOIN THE CLUB",
+        "txt": "Sign up now and receive 15% off your next order!"
+      }
+    },
+    "spacer2": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    }
+  },
+  "order": [
+    "main",
+    "spacer",
+    "newsletter",
+    "spacer2"
+  ]
+}

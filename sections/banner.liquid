@@ -1,0 +1,100 @@
+<div class="banner-section">
+  <div class="owl-theme owl-carousel">
+    {% for block in section.blocks %}
+      <div class="item">
+        <div class="bw-slide-wrap pos-rel">
+          <div class="bw-img pos-rel">
+            {% if block.settings.vid-check %}
+              {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'img ab' }}
+            {% else %}
+              <img
+                src="{{ block.settings.img |  img_url: 'master' }}"
+                alt="{{ section.settings.video_img.title }}"
+                class="img ab">
+            {% endif %}
+          </div>
+          <div class="bw-txt">
+            <div class="bw-head">
+              <h1 class="txt-center white">{{ block.settings.head }}</h1>
+            </div>
+            {% if block.settings.text %}
+              <div class="bw-content">
+                <p class="white txt-center">{{ block.settings.text }}</p>
+              </div>
+            {% endif %}
+            <div class="bw-anchor">
+              <a href="{{ block.settings.cta_link }}" class="custom-btn white">{{ block.settings.cta_txt }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.banner-section .owl-carousel').owlCarousel({
+      loop:false,
+      margin:10,
+      nav:false,
+      items:1,
+      animateOut: 'fadeOut',
+      mouseDrag: false,
+      touchDrag: false,
+      pullDrag: false,
+      autoplay:true,
+      autoplayTimeout:5000,
+      autoplayHoverPause: false
+    });
+  })
+</script>
+
+{% schema %}
+  {
+    "name": "Banner Section",
+    "tag": "section",
+    "class": "Banner",
+    "blocks": [
+      {
+        "type": "slider",
+        "name": "Banner Slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "img",
+            "label": "Select Image"
+          },
+          {
+            "type": "checkbox",
+            "id": "vid-check",
+            "label": "Video Enable",
+            "default": false
+          },
+          {
+            "type": "video",
+            "id": "video",
+            "label": "Select Video"
+          },
+          {
+            "type": "text",
+            "id": "head",
+            "label": "Heading"
+          }, {
+            "type": "textarea",
+            "id": "text",
+            "label": "Content"
+          }, {
+            "type": "page",
+            "id": "cta_link",
+            "label": "Select Page"
+          }, {
+            "type": "text",
+            "id": "cta_txt",
+            "label": "Button Title"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

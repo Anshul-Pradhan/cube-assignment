@@ -1,0 +1,54 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu",
+          "select_logo": "shopify://shop_images/STALLUXE_5.png"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "menu_blocks_FwpxbA": {
+            "type": "menu_blocks",
+            "settings": {
+              "menu_handle": "kundenbetreuung",
+              "heading": "Customer service"
+            }
+          },
+          "menu_blocks_jnrkmh": {
+            "type": "menu_blocks",
+            "settings": {
+              "menu_handle": "footer",
+              "heading": "Our policy"
+            }
+          }
+        },
+        "block_order": [
+          "menu_blocks_FwpxbA",
+          "menu_blocks_jnrkmh"
+        ],
+        "settings": {
+          "con_head": "Contact details",
+          "con_email": "Contact:",
+          "email": "info@stalluxe.com",
+          "open_head": "Opening hours:",
+          "opening": "Monday - Friday: 09:30 - 18:00<br>Saturday: 12:00 - 17:00<br>Sunday: Closed",
+          "show_payment_icons": true
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}

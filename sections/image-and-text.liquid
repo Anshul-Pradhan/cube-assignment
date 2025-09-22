@@ -1,0 +1,66 @@
+<div class="image-and-text">
+  <div class="container-fluid">
+    <div class="os-inner">
+      <div class="os-left pos-rel overflow-hidden">
+        <img
+          src="{{ section.settings.img |  img_url: 'master' }}"
+          alt="Story Image"
+          class="img ab animate-img">
+      </div>
+      <div class="os-right">
+        <h2>{{ section.settings.head }}</h2>
+        {% if section.settings.sm_img %}
+          <div class="os-sm-img animate-box-less">
+            <img
+              src="{{ section.settings.sm_img |  img_url: 'master' }}"
+              alt="Story Small Image"
+              class="img ab">
+          </div>
+        {% endif %}
+        {% if section.settings.para %}
+          <p>{{ section.settings.para }}</p>
+        {% endif %}
+        <div class="cta">
+          <a href="{{ section.settings.url }}" class="custom-btn dark">{{ section.settings.cta }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image and Text",
+    "class": "imageText",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "img",
+        "label": "Select Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "sm_img",
+        "label": "Select Small Image"
+      },
+      {
+        "type": "text",
+        "id": "head",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "para",
+        "label": "Content"
+      }, {
+        "type": "page",
+        "id": "url",
+        "label": "Select Page"
+      }, {
+        "type": "text",
+        "id": "cta",
+        "label": "Button text"
+      }
+    ]
+  }
+{% endschema %}

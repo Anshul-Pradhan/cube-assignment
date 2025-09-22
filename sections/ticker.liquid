@@ -1,0 +1,41 @@
+<div class="ticker">
+  {% for block in section.blocks %}
+    <div class="item">
+      <p>{{ block.settings.txt }}</p>
+      <div class="dot"></div>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.ticker').bxSlider({
+        minSlides: 6,
+        slideWidth: 'auto',
+        slideMargin: 50,
+        ticker: true,
+        speed: 60000
+        });
+    })
+</script>
+
+{% schema %}
+  {
+    "name": "Ticker Section",
+    "tag": "section",
+    "class": "tickerSection",
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Ticker Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "txt",
+            "label": "Enter Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

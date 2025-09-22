@@ -1,0 +1,91 @@
+<div class="recommended-products">
+  <div class="container-fluid">
+    <div class="collection-products-in">
+      <div class="cp-head-nav">
+        <div class="head center">
+          <h2>{{ section.settings.head }}</h2>
+          {% if section.settings.txt %}
+            <p>{{ section.settings.txt }}</p>
+          {% endif %}
+        </div>
+        <div class="cp-nav recommend"></div>
+      </div>
+      <div class="product-grid recommend">
+        <div class="owl-theme owl-carousel"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Recommended Products",
+    "settings": [
+      {
+        "type": "text",
+        "id": "head",
+        "label": "Heading",
+        "default": "Articles in the same category"
+      }, {
+        "type": "textarea",
+        "id": "txt",
+        "label": "Sub Heading"
+      }
+    ]
+  }
+{% endschema %}
+
+<script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const productId = {{ product.id }};
+        
+        // Fetch product recommendations
+        fetch(`/recommendations/products.json?product_id=${productId}&limit=16`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.products.length > 0) {
+              let recommendationsHtml = '';
+              data.products.forEach(product => {
+                recommendationsHtml += `
+                  <div class="item">
+                    <a href="${product.url}" class="product-card">
+                      <div class="sc-img pos-rel">
+                        <img src="${product.images[0]}" alt="${product.images[0].alt || ''}" class="img ab first">
+                        <img src="${product.images[1]}" alt="${product.images[1].alt || ''}" class="img ab second">
+                        <div class="buy-now">
+                          <p class="custom-btn dark">Buy Now</p>
+                        </div>
+                      </div>
+                      <div class="sc-txt">
+                        <h3 class="sct-title">${product.title}</h3>
+                        <p class="sct-price">Price: ${product.price}</p>
+                      </div>
+                    </a>
+                  </div>
+                `;
+              });
+
+              const carousel = $('.product-grid.recommend .owl-carousel');
+              carousel.html(recommendationsHtml);
+
+              // Initialize Owl Carousel here
+              carousel.owlCarousel({
+                margin: 15,
+                responsiveClass: true,
+                nav: true,
+                dots: false,
+                loop: false,
+                navText: [
+                  "<img src='{{ 'left-arrow.svg' |  asset_url }}' />",
+                  "<img src='{{ 'right-arrow.svg' |  asset_url }}' />"
+                ],
+                responsive: {
+                  0: { items: 1, nav: true },
+                  600: { items: 3 },
+                  1000: { items: 4, nav: true }
+                }
+              });
+            }
+          });
+      });
+</script>

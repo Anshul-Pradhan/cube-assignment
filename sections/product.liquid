@@ -1,0 +1,420 @@
+{% assign selected_variant = product.selected_or_first_available_variant %}
+<div class="product-info">
+  <div class="container-fluid">
+    <div class="pro-grid">
+      <div class="pro-img">
+        <div class="product-main-slider">
+          {% for media in product.media %}
+            <div class="item">
+              <div class="prod-main">
+                {% render 'product-media' | media: media %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="product-thumb-wrapper">
+          <div class="product-thumb-slider">
+            {% for media in product.media %}
+              <div class="item">
+                <div class="prod-thumb">
+                  {% render 'product-media' | media: media %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="thumb-slide-count">
+            <span class="current">01</span>
+            /
+            <span class="total">03</span>
+          </div>
+        </div>
+      </div>
+      <div class="pro-desp">
+        <ajax-cart-product-form>
+            {% form 'product'
+              , product
+              , id: 'product-form'
+              , novalidate: 'novalidate' %}
+              <input
+                type="hidden"
+                name="id"
+                value="{{ selected_variant.id }}">
+
+              {% for block in section.blocks %}
+                {% case block.type %}
+                  {% when 'title' %}
+                    <div class="title">
+                      <h1>{{ product.title }}</h1>
+                    </div>
+                  {% when 'price' %}
+                    <div class="price" id="price-{{ section.id }}">
+                      Price:
+                      <strike class="real-price">{{ selected_variant.compare_at_price | money }}</strike>
+                      <span class="sell-price">
+                        {{ selected_variant.price | money }}
+                      </span>
+
+                      {% if selected_variant.price < selected_variant.compare_at_price %}
+                        <span>Sale</span>
+                      {% endif %}
+                    </div>
+                  {% when 'variant_selector' %}
+                    <div class="variant">
+                      {% unless product.has_only_default_variant %}
+                        <variant-selector data-url="{{ product.url }}" data-section="{{ section.id }}">
+                          {% for option in product.options_with_values %}
+                            <div class="variant-list">
+                              <label>{{ option.name }}</label>
+                              <ul class="variant-option" data-index="{{ forloop.index0 }}">
+                                {% for value in option.values %}
+                                  <li data-value="{{ value | escape }}" class="variant-value {% if option.selected_value == value %}active{% endif %}">
+                                    {{ value }}
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+                          {% endfor %}
+                          <script type="application/json">
+                            {{ product.variants | json }}
+                          </script>
+                        </variant-selector>
+                      {% endunless %}
+                    </div>
+                  {% when 'description' %}
+                    <div class="pro-desp">
+                      <p>{{ product.description }}</p>
+                    </div>
+                  {% when 'checkout_buttons' %}
+                    <div class="submit">
+                      <button
+                        class="custom-btn dark cart-open {% if selected_variant.available == false %}disabled{% endif %}"
+                        type="submit"
+                        name="add"
+                        data-ajax-cart-request-button
+                        data-menu="#main-nav"
+                        {% if selected_variant.available == false %}
+                        disabled
+                        {% endif %}>
+                        {% if selected_variant.available == false %}
+                          Sold Out
+                        {% else %}
+                          Add To Cart
+                        {% endif %}
+                      </button>
+                    </div>
+                    {% if section.settings.show_payment_icons %}
+                      <div class="payment-icons">
+                        {% for type in shop.enabled_payment_types %}
+                          {{ type | payment_type_svg_tag }}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  {% when 'custom_html' %}
+                    <div class="custom-html-block" {{ block.shopify_attributes }}>
+                      {{ block.settings.custom_code }}
+                    </div>
+                  {% when 'accordions' %}
+                    <div class="product-accordion">
+                      <div class="item">
+                        <div class="prod-faq-head">
+                          <div class="prod-faq-ques-div">
+                            <p class="prod-faq-ques">{{ block.settings.product_details_head }}</p>
+                          </div>
+                          <div class="arrow">
+                            {% render 'plus-icon' %}
+                          </div>
+                        </div>
+                        <div class="prod-faq-ans">
+                          {{ product.description }}
+                        </div>
+                      </div>
+                      <div class="item">
+                        <div class="prod-faq-head">
+                          <div class="prod-faq-ques-div">
+                            <p class="prod-faq-ques">{{ block.settings.product_care_head }}</p>
+                          </div>
+                          <div class="arrow">
+                            {% render 'plus-icon' %}
+                          </div>
+                        </div>
+                        <div class="prod-faq-ans">
+                          {{ block.settings.product_care.content }}
+                        </div>
+                      </div>
+                      <div class="item">
+                        <div class="prod-faq-head">
+                          <div class="prod-faq-ques-div">
+                            <p class="prod-faq-ques">{{ block.settings.product_return_head }}</p>
+                          </div>
+                          <div class="arrow">
+                            {% render 'plus-icon' %}
+                          </div>
+                        </div>
+                        <div class="prod-faq-ans">
+                          {{ block.settings.product_return.content }}
+                        </div>
+                      </div>
+                    </div>
+                  {% when '@app' %}
+                      {% render block %}
+                {% else %}
+                  {% endcase %}
+                {% endfor %}
+              {% endform %}
+            </ajax-cart-product-form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('liquid-ajax-cart:request-end', event => {
+      const {requestState} = event.detail;
+
+    // If the "add to cart" request is successful
+      if (requestState.requestType === 'add' && requestState.responseData ?. ok) { // Add the CSS class to the "body" tag
+        document.body.classList.add('js-show-ajax-cart');
+      }
+    });
+  </script>
+
+  <script defer>
+    class VariantSelector extends HTMLElement {
+      constructor() {
+        super();
+        this.addEventListener("click", (e) => this.onVariantClick(e));
+      }
+
+      onVariantClick(e) {
+        const li = e.target.closest("li[data-value]");
+        if (!li) return;
+
+        // Toggle active state
+        const parent = li.closest("ul.variant-option");
+        parent.querySelectorAll("li").forEach((el) => el.classList.remove("active"));
+        li.classList.add("active");
+
+        // Update selections
+        this.getSelectedOptions();
+        this.getSelectedVariant();
+
+        if (this.currentVariant) {
+          this.updateURL();
+          this.updateFormID();
+          this.updatePrice();
+        }
+      }
+
+      getSelectedOptions() {
+        this.options = Array.from(
+          this.querySelectorAll("ul.variant-option"),
+          (ul) => ul.querySelector("li.active")?.dataset.value
+        );
+        console.log("Selected Options:", this.options);
+      }
+
+      getVariantJSON() {
+        this.variantData =
+          this.variantData ||
+          JSON.parse(this.querySelector("[type='application/json']").textContent);
+        return this.variantData;
+      }
+
+      getSelectedVariant() {
+        this.currentVariant = this.getVariantJSON().find((variant) => {
+          return variant.options.every(
+            (option, index) => this.options[index] === option
+          );
+        });
+        console.log("Current Variant:", this.currentVariant);
+      }
+
+      updateURL() {
+        if (!this.currentVariant) return;
+        window.history.replaceState(
+          {},
+          "",
+          `${this.dataset.url}?variant=${this.currentVariant.id}`
+        );
+      }
+
+      updateFormID() {
+        const form_input = document
+          .querySelector("#product-form")
+          .querySelector('input[name="id"]');
+        form_input.value = this.currentVariant.id;
+      }
+
+      updatePrice() {
+        fetch(
+          `${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`
+        )
+          .then((response) => response.text())
+          .then((responseText) => {
+            const html = new DOMParser().parseFromString(responseText, "text/html");
+            const oldPrice = document.getElementById("price-{{ section.id }}");
+            const newPrice = html.getElementById("price-{{ section.id }}");
+            if (oldPrice && newPrice) oldPrice.innerHTML = newPrice.innerHTML;
+          });
+      }
+    }
+
+    customElements.define("variant-selector", VariantSelector);
+
+  </script>
+
+  <script>
+    $(document).ready(function () {
+        var $mainSlider = $('.product-main-slider');
+        var $thumbSlider = $('.product-thumb-slider');
+
+        // Initialize Main Slider
+        $mainSlider.slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          fade: true,
+          asNavFor: $thumbSlider
+        });
+
+        // Initialize Thumbnail Slider
+        $thumbSlider.slick({
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          asNavFor: $mainSlider,
+          dots: false, // disable default dots
+          arrows: true,
+          centerMode: false,
+          vertical: true,
+          focusOnSelect: true,
+          responsive: [
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                vertical: false
+              }
+            }
+          ],
+          prevArrow: '<button class="slide-arrow prev-arrow"><img src="{{ 'left-arrow.svg' |  asset_url }}"/></button>',
+          nextArrow: '<button class="slide-arrow next-arrow"><img src="{{ 'right-arrow.svg' |  asset_url }}"/></button>',
+        });
+
+        // Set total count
+        $thumbSlider.on('init reInit afterChange', function (event, slick, currentSlide) {
+          var i = (currentSlide ? currentSlide : 0) + 1;
+          $('.thumb-slide-count .current').text(i.toString().padStart(2, '0'));
+        });
+
+        var totalSlides = $thumbSlider.slick("getSlick").slideCount;
+        $('.thumb-slide-count .total').text(totalSlides.toString().padStart(2, '0'));
+
+        // Trigger once manually after init
+        $thumbSlider.trigger('init');
+      });
+
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $(".prod-faq-head").click(function() {
+        $(this).parent().toggleClass("active");
+        $(this).siblings(".prod-faq-ans").slideToggle();
+        $(".product-accordion .item")
+          .not($(this).parent())
+          .removeClass("active")
+          .find(".prod-faq-ans")
+          .slideUp();
+      });
+    });
+  </script>
+
+  {% schema %}
+    {
+      "name": "Product",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_payment_icons",
+          "label": "t:labels.show_payment_icons",
+          "default": true
+        }
+      ],
+      "blocks": [
+        {
+          "type": "title",
+          "name": "Title",
+          "limit": 1
+        },
+        {
+          "type": "custom_html",
+          "name": "Custom Liquid",
+          "settings": [
+            {
+              "type": "html",
+              "id": "custom_code",
+              "label": "Custom Liquid Code"
+            }
+          ]
+        },
+        {
+          "type": "price",
+          "name": "Price",
+          "limit": 1
+        },
+        {
+          "type": "variant_selector",
+          "name": "Variant Selector",
+          "limit": 1
+        }, {
+          "type": "description",
+          "name": "Description",
+          "limit": 1
+        }, {
+          "type": "checkout_buttons",
+          "name": "Checkout Buttons",
+          "limit": 1
+        }, {
+          "type": "accordions",
+          "name": "Accordion",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "text",
+              "id": "product_details_head",
+              "label": "Product Details Heading",
+              "default": "Product Details"
+            },
+            {
+              "type": "richtext",
+              "id": "product_details",
+              "label": "Product Details"
+            },
+            {
+              "type": "text",
+              "id": "product_care_head",
+              "label": "Product Shipping Heading",
+              "default": "Shipping / Care Guide"
+            },
+            {
+              "type": "page",
+              "id": "product_care",
+              "label": "Shipping Policy"
+            }, {
+              "type": "text",
+              "id": "product_return_head",
+              "label": "Product Return Policy Heading",
+              "default": "Return & policy"
+            }, {
+              "type": "page",
+              "id": "product_return",
+              "label": "Return Policy"
+            }
+          ]
+        }, {
+          "type": "@app"
+        }
+      ]
+    }
+  {% endschema %}

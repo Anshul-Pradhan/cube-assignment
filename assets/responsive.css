@@ -1,0 +1,298 @@
+/* Responsive Css Starts */
+/* Max Width 1800px */
+@media(max-width: 1800px){
+}
+/* Max Width 1800px Ends */
+/* Max Width 1700px */
+@media(max-width: 1700px){
+}
+/* Max Width 1700px Ends */
+/* Max Width 1600px */
+@media(max-width: 1600px){
+}
+/* Max Width 1600px Ends */
+/* Max Width 1500px */
+@media(max-width: 1500px){
+}
+/* Max Width 1500px Ends */
+/* Max Width 1400px */
+@media(max-width: 1400px){
+}
+/* Max Width 1400px Ends */
+/* Max Width 1300px */
+@media(max-width: 1300px){
+}
+/* Max Width 1300px Ends */
+/* Max Width 1200px */
+@media(max-width: 1200px){
+    .nav-content{
+        gap: 26px;
+    }
+    .pu-icon{
+        width: 60px;
+        height: 60px;
+    }
+    .pu-txt .pu-head, .pu-txt .pu-head font{
+        font-size: 24px;
+    }
+    .filter-sidebar .filter-sidebar-form{
+        width: 40%;
+    }
+}
+/* Max Width 1200px Ends */
+/* Max Width 1100px */
+@media(max-width: 1100px){
+}
+/* Max Width 1100px Ends */
+/* Max Width 991px */
+@media(max-width: 991px){
+    p, p font{
+        font-size: 14px;
+    }
+    .nav-content{
+        position: fixed;
+        right: 0;
+        top: 76px;
+        background-color: var(--color-background);
+        flex-direction: column;
+        width: 100%;
+        transition: 0.4s all ease;
+        opacity: 0;
+        clip-path: inset(0 0 100% 0);
+        padding: 20px 24px;
+    }
+    .nav-content.active{
+        transition: 1s all ease;
+        opacity: 1;
+        clip-path: inset(0 0 0% 0);
+    }
+    .nav-link.dropdown{
+        padding: 0;
+    }
+    .mob-menu{
+        display: flex;
+        width: 30px;
+        height: 30px;
+        position: relative;
+    }
+    header{
+        padding: 12px 0;
+    }
+    .banner-section {
+        margin-top: 60px;
+    }
+    .bw-img {
+        padding-top: calc(100svh - 60px);
+    }
+    .nav-logo{
+        width: 15%;
+    }
+    .nav-store .search-button, .nav-store .cart{
+        width: 28px;
+        height: 28px;
+    }
+    .nd-ab{
+        max-height: 200px;
+        z-index: 1;
+        /* left: 0; */
+        /* right: 0; */
+        top: 90px;
+        margin: 0 auto;
+        width: fit-content;
+        overflow: hidden;
+        overflow-y: auto;
+        margin-left: -40px;
+    }
+    .nav-dropdown:hover .nd-ab{
+        clip-path: inset(0 0 100% 0);
+        opacity: 0;
+    }
+    .nd-ab.active{
+        clip-path: inset(0 0 0 0) !important;
+        opacity: 1 !important;
+    }
+    .mob-menu .cross{
+        transition: 0.4s all ease;
+        opacity: 0;
+        position: absolute;
+        inset: 0;
+    }
+    .mob-menu.active .cross{
+        opacity: 1;
+    }
+    .mob-menu.active .ham{
+        opacity: 0;
+    }
+    .mob-menu .ham{
+        transition: 0.4s all ease;
+        opacity: 1;
+    }
+    .os-right{
+        width: 45%;
+    }
+    .newsletter-section .ns-form{
+        width: 100%;
+    }
+    .pro-grid{
+        flex-direction: column;
+        gap: 40px;
+    }
+    .pro-img{
+        width: 100%;
+        position: static;
+    }
+    .pro-desp{
+        width: 100%;
+    }
+    .product-info {
+        margin-top: 100px;
+    }
+    .thumb-slide-count{
+        font-size: 24px;
+    }
+    .filter-sidebar .filter-sidebar-form{
+        width: 70%;
+    }
+    .collection-wrapper{
+        grid-template-columns: 1fr 1fr;
+    }
+    .fw-navs{
+        width: 60%;
+    }
+    .fwu-left{
+        width: 30%;
+    }
+    .my-cart{
+        width: 70%;
+    }
+}
+/* Max Width 991px Ends */
+/* Max Width 767px */
+@media(max-width: 767px){
+    .nav-logo{
+        width: 20%;
+    }
+    .nav-store .search-button, .nav-store .cart{
+        width: 18px;
+        height: 18px;
+    }
+    .mob-menu{
+        width: 20px;
+        height: 20px;
+    }
+    .nav-content{
+        top: 60px;
+    }
+    .os-inner{
+        flex-direction: column-reverse;
+        gap: 40px;
+    }
+    .os-left{
+        width: 100%;
+        padding-top: 120%;
+    }
+    .os-right{
+        width: 100%;
+    }
+    .ticker .item p, .ticker .item p font{
+        font-size: 44px;
+    }
+    .form-in{
+        flex-direction: column;
+        gap: 12px;
+    }
+    .form-in .email_input {
+        width: 100%;
+    }   
+    .form-in .submit_btn{
+        width: 100%;
+        justify-content: center;
+    }
+    .form-in input{
+        border-right: 1px solid var(--color-background);
+    }
+    .form-in .submit_btn button{
+        width: auto;
+    }
+    .pro-img{
+        flex-direction: column;
+        gap: 16px;
+    }
+    .product-main-slider {
+        width: 100%;
+    }
+    .product-thumb-wrapper{
+        width: 100%;
+    }
+    .product-thumb-slider .slide-arrow.prev-arrow {
+        transform: rotate(0);
+        right: inherit;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+    }
+    .product-thumb-slider .slide-arrow.next-arrow {
+        transform: rotate(0);
+        left: inherit;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+    }
+    .product-thumb-slider .slick-slide {
+        margin-left: 8px;
+    }
+    .product-thumb-slider .slick-list {
+        margin-left: -10px;
+    }
+    .product-thumb-slider {
+        padding: 0 10px !important;
+    }
+    .pu-in{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 40px;
+    }
+    .filter-sidebar .filter-sidebar-form{
+        width: 100%;
+    }
+    .fw-upper{
+        flex-direction: column;
+    }
+    .fwu-left{
+        width: 100%;
+    }
+    .fw-navs {
+        width: 100%;
+        flex-direction: column;
+    }
+    .sbc-col{
+        grid-template-columns: 1fr;
+    }
+    .sbc-col .slider_card{
+        grid-column: span 1 !important;
+    }
+    .my-cart {
+        width: 100%;
+    }
+    .product-cart-card .left{
+        width: 100%;
+    }
+    .product-cart-card {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .my-cart-in{
+        padding: 20px;
+    }
+}
+/* Max Width 767px Ends */
+
+/* Max Width 500px */
+
+@media(max-width: 500px){
+    .collection-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Max Width 500px Ends */
+/* Responsive Css Ends */

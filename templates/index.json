@@ -1,0 +1,273 @@
+{
+  "sections": {
+    "main": {
+      "type": "banner",
+      "blocks": {
+        "item1": {
+          "type": "slider",
+          "settings": {
+            "img": "shopify://shop_images/Stalluxe_Banner_2.webp",
+            "head": "Buy high-quality and stylish clothes",
+            "text": "Shop luxury fashion for women and men at Stalluxe. Discover stylish, exclusive clothing of the highest quality for every occasion.",
+            "cta_link": "/collections/all",
+            "cta_txt": "View our Collections"
+          }
+        },
+        "item2": {
+          "type": "slider",
+          "settings": {
+            "img": "shopify://shop_images/Stalluxe_Banner_2.webp",
+            "head": "Buy high-quality and stylish clothes",
+            "text": "Shop luxury fashion for women and men at Stalluxe. Discover stylish, exclusive clothing of the highest quality for every occasion.",
+            "cta_link": "/collections/all",
+            "cta_txt": "View our Collections"
+          }
+        },
+        "item3": {
+          "type": "slider",
+          "settings": {
+            "img": "shopify://shop_images/Stalluxe_Banner_2.webp",
+            "head": "Buy high-quality and stylish clothes",
+            "text": "Shop luxury fashion for women and men at Stalluxe. Discover stylish, exclusive clothing of the highest quality for every occasion.",
+            "cta_link": "/collections/all",
+            "cta_txt": "View our Collections"
+          }
+        },
+        "item4": {
+          "type": "slider",
+          "settings": {
+            "img": "shopify://shop_images/Stalluxe_Banner_2.webp",
+            "head": "Buy high-quality and stylish clothes",
+            "text": "Shop luxury fashion for women and men at Stalluxe. Discover stylish, exclusive clothing of the highest quality for every occasion.",
+            "cta_link": "/collections/all",
+            "cta_txt": "View our Collections"
+          }
+        }
+      },
+      "block_order": [
+        "item1",
+        "item2",
+        "item3",
+        "item4"
+      ],
+      "settings": {}
+    },
+    "ticker": {
+      "type": "ticker",
+      "blocks": {
+        "item1": {
+          "type": "item",
+          "settings": {
+            "txt": "TIMELESS ELEGANCE"
+          }
+        },
+        "item2": {
+          "type": "item",
+          "settings": {
+            "txt": "HIGH-QUALITY FABRICS"
+          }
+        },
+        "item3": {
+          "type": "item",
+          "settings": {
+            "txt": "HANDMADE DETAILS"
+          }
+        },
+        "item4": {
+          "type": "item",
+          "settings": {
+            "txt": "MODERN SILHOUETTES"
+          }
+        },
+        "item5": {
+          "type": "item",
+          "settings": {
+            "txt": "LUXURY REDEFINED"
+          }
+        },
+        "item6": {
+          "type": "item",
+          "settings": {
+            "txt": "MADE TO LAST"
+          }
+        },
+        "item11": {
+          "type": "item",
+          "settings": {
+            "txt": "TIMELESS ELEGANCE"
+          }
+        },
+        "item21": {
+          "type": "item",
+          "settings": {
+            "txt": "HIGH-QUALITY FABRICS"
+          }
+        },
+        "item31": {
+          "type": "item",
+          "settings": {
+            "txt": "HANDMADE DETAILS"
+          }
+        },
+        "item41": {
+          "type": "item",
+          "settings": {
+            "txt": "MODERN SILHOUETTES"
+          }
+        },
+        "item51": {
+          "type": "item",
+          "settings": {
+            "txt": "LUXURY REDEFINED"
+          }
+        },
+        "item61": {
+          "type": "item",
+          "settings": {
+            "txt": "MADE TO LAST"
+          }
+        }
+      },
+      "block_order": [
+        "item1",
+        "item2",
+        "item3",
+        "item4",
+        "item5",
+        "item6",
+        "item11",
+        "item21",
+        "item31",
+        "item41",
+        "item51",
+        "item61"
+      ],
+      "settings": {}
+    },
+    "spacer": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 50
+      }
+    },
+    "shop_collection": {
+      "type": "shop-collection",
+      "settings": {
+        "head": "Bestselling",
+        "coll": "bodys"
+      }
+    },
+    "spacer1": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    },
+    "our-story": {
+      "type": "image-and-text",
+      "settings": {
+        "img": "shopify://shop_images/6_7fbe99f9-85e9-49e8-b9e7-1a26047fbad6.webp",
+        "sm_img":"shopify://shop_images/8_900x_67879ff4-e6cd-4c7c-8157-79699167be04.webp",
+        "head": "Our story",
+        "para": "Stalluxe represents the essence of timeless elegance and modern sophistication. Inspired by the Mediterranean lifestyle, we combine clean lines, luxurious materials, and an effortless lightness that makes each collection unique.",
+        "url": "/collections/all",
+        "cta": "Shop All"
+      }
+    },
+    "spacer2": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    },
+    "shop_by_collection": {
+      "type": "shop-by-collection",
+      "blocks": {
+        "item1": {
+          "type": "col",
+          "settings": {
+            "col-item": "kleider",
+            "img": "shopify://shop_images/O1CN01YocbMk28ztATXzD71__2219737478004-0-cib.jpg"
+          }
+        },
+        "item2": {
+          "type": "col",
+          "settings": {
+            "col-item": "oberteile",
+            "img": "shopify://shop_images/11294866896_762138315.jpg"
+          }
+        },
+        "item3": {
+          "type": "col",
+          "settings": {
+            "col-item": "strickwaren",
+            "img": "shopify://shop_images/O1CN01vf4HIx20osYBI76as__2213263936897-0-cib.jpg"
+          }
+        },
+        "item4": {
+          "type": "col",
+          "settings": {
+            "col-item": "unterteile",
+            "img": "shopify://shop_images/O1CN015O6SbT1JL5SRrYYWJ__2216615261011-0-cib.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "item1",
+        "item2",
+        "item3",
+        "item4"
+      ],
+      "settings": {
+        "head": "SHOP BY CATEGORY"
+      }
+    },
+    "spacer3": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    },
+    "shop_collection1": {
+      "type": "shop-collection",
+      "settings": {
+        "head": "New Arrival",
+        "coll": "blusen"
+      }
+    },
+    "spacer4": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    },
+    "newsletter": {
+      "type": "newsletter-section",
+      "settings": {
+        "head": "JOIN THE CLUB",
+        "txt": "Sign up now and receive 15% off your next order!"
+      }
+    },
+    "spacer5": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ticker",
+    "spacer",
+    "shop_collection",
+    "spacer1",
+    "our-story",
+    "spacer2",
+    "shop_by_collection",
+    "spacer3",
+    "shop_collection1",
+    "spacer4",
+    "newsletter",
+    "spacer5"
+  ]
+}

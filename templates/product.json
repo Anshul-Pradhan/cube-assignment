@@ -1,0 +1,136 @@
+{
+  "sections": {
+    "template": {
+      "type": "product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "custom-html": {
+          "type": "custom_html",
+          "settings": {
+            "custom_code": "<div style=\"display: flex; flex-direction: column; gap: 14px; align-items: flex-start; font-size: 15px; line-height: 1.4;\">\n                  <!-- 14 Tage kostenlose Rücksendung -->\n                  <div style=\"display: flex; align-items: center; gap: 10px;\">\n                    <img src=\"https://cdn.shopify.com/s/files/1/0903/0801/8561/files/STALLUXE_1500_x_1500_px_1.png?v=1752660417\" alt=\"Shipping Icon\" style=\"width: 20px; height: 20px;\">\n                    <span>30 days free return</span>\n                  </div>\n                  <!-- Kauf auf Rechnung mit Klarna -->\n                  <div style=\"display: flex; align-items: center; gap: 10px;\">\n                    <img src=\"https://cdn.shopify.com/s/files/1/0654/9028/8866/files/2_56504214-2075-45fd-ac85-96fc1472cb2c.png?v=1752311068\" alt=\"Klarna Icon\" style=\"width: 20px; height: 20px;\">\n                    <span>Purchase on account with Klarna</span>\n                  </div>\n                  <!-- Express Lieferung -->\n                  <div style=\"display: flex; align-items: center; gap: 10px;\">\n                    <img src=\"https://cdn.shopify.com/s/files/1/0654/9028/8866/files/3_1bb5c1ff-5c46-4147-b96c-ac361380aea8.png?v=1752311078\" alt=\"Express Icon\" style=\"width: 20px; height: 20px;\">\n                    <span>Express: 3 working days delivery time</span>\n                  </div>\n                </div>"
+          }
+        },
+        "variant_selector": {
+          "type": "variant_selector",
+          "settings": {}
+        },
+        "checkout_buttons": {
+          "type": "checkout_buttons",
+          "settings": {}
+        },
+        "accordions": {
+          "type": "accordions",
+          "settings": {
+            "product_details_head": "Product Details",
+            "product_details": "",
+            "product_care_head": "Shipping / Care Guide",
+            "product_care": "bestellen-lieferung",
+            "product_return_head": "Return & policy",
+            "product_return": "umtausch-und-ruckgabe-stalluxe"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "custom-html",
+        "variant_selector",
+        "checkout_buttons",
+        "accordions"
+      ],
+      "settings": {
+        "show_payment_icons": true
+      }
+    },
+    "spacer": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    },
+    "usp": {
+      "type": "product-usp",
+      "blocks": {
+        "item1": {
+          "type": "usp",
+          "settings": {
+            "img": "shopify://shop_images/Gratis_Verzending.gif",
+            "head": "Free Shipping",
+            "para": "Delivered within 5–8 business days as standard. Express delivery within 3 days."
+          }
+        },
+        "item2": {
+          "type": "usp",
+          "settings": {
+            "img": "shopify://shop_images/30_Dagen_bedenktijd_d40559f9-ad25-40dd-8ab7-8e03b603c084.gif",
+            "head": "Purchase on account",
+            "para": "Order today, try your product for free, and pay after 30 days!"
+          }
+        },
+        "item3": {
+          "type": "usp",
+          "settings": {
+            "img": "shopify://shop_images/Betaal_Veilig.gif",
+            "head": "30 days free return",
+            "para": "Not satisfied? Simply return your order to our warehouse in Germany free of charge!"
+          }
+        }
+      },
+      "block_order": [
+        "item1",
+        "item2",
+        "item3"
+      ],
+      "settings": {}
+    },
+    "spacer2": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    },
+    "recommended": {
+      "type": "recommended-product",
+      "settings": {
+        "head": "Articles in the same category",
+        "txt": ""
+      }
+    },
+    "spacer3": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    },
+    "newsletter": {
+      "type": "newsletter-section",
+      "settings": {
+        "head": "JOIN THE CLUB",
+        "txt": "Sign up now and receive 15% off your next order!"
+      }
+    },
+    "spacer4": {
+      "type": "spacer",
+      "settings": {
+        "spacer_height": 100
+      }
+    }
+  },
+  "order": [
+    "template",
+    "spacer",
+    "usp",
+    "spacer2",
+    "recommended",
+    "spacer3",
+    "newsletter",
+    "spacer4"
+  ]
+}

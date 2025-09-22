@@ -1,0 +1,24 @@
+{% style %}
+  {% # Loads all font variantions with display: swap %}
+  {{ settings.primary_font | font_face: font_display: 'swap' }}
+  {{ settings.primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+  {{ settings.primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+  {{ settings.primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+
+  {{ settings.heading_font | font_face: font_display: 'swap' }}
+  {{ settings.heading_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+  {{ settings.heading_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+  {{ settings.heading_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+
+  :root {
+    --font-primary--family: {{ settings.primary_font.family }}, {{ settings.primary_font.fallback_families }};
+    --font-primary--style: {{ settings.primary_font.style }};
+    --font-primary--weight: {{ settings.primary_font.weight }};
+    --font-head--family: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
+    --font-head--style: {{ settings.heading_font.style }};
+    --font-head--weight: {{ settings.heading_font.weight }};
+    --color-background: {{ settings.background_color }};
+    --color-foreground: {{ settings.foreground_color }};
+    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+  }
+{% endstyle %}

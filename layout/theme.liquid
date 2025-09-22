@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ page_title }}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="{{ page_description | escape }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    {{ content_for_header }}
+    <!-- Header hook for plugins -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.1/dist/lenis.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
+  <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    {% # Inlined CSS Variables %}
+  {% render 'css-variables' %}
+    {% comment %} {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }} {% endcomment %}
+    {{ 'application.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'responsive.css' | asset_url | stylesheet_tag: preload: true }}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    {% section 'cart-drawer' %}
+    {% section 'header' %}
+    <main role="main">
+      {{ content_for_layout }}
+
+      {% section 'footer' %}
+    </main>
+    {% comment %} Script {% endcomment %}
+    <script src="https://unpkg.com/lenis@1.3.1/dist/lenis.min.js" defer></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js" defer></script>
+    <script
+      type="text/javascript"
+      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+      defer></script>
+    <script src="{{ 'application.js' | asset_url }}" defer></script>
+
+    <script type="application/json" data-ajax-cart-initial-state>
+      {{ cart | json }}
+    </script>
+
+    <script type="module">
+      import '{{ "liquid-ajax-cart-v2.1.2.js" | asset_url }}';
+    </script>
+
+    <script src="{{ 'application.js' | asset_url }}" defer></script>
+    <script>
+      function runWhenInit() {
+        console.log("The current cart state is: ", window.liquidAjaxCart.cart);
+      }
+      
+      if (window.liquidAjaxCart ?. init) { // if Liquid Ajax Cart is already initialized
+        runWhenInit();
+      } else { // wait for Liquid Ajax Cart to be initialized
+        document.addEventListener("liquid-ajax-cart:init", runWhenInit);
+      }
+    </script>
+
+    {% comment %} Smooth Scroll Script {% endcomment %}
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. Init Lenis
+        const lenis = new Lenis({
+          duration: 1.2,
+          smoothWheel: true,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+
+        // 2. GSAP + ScrollTrigger integration
+        gsap.registerPlugin(ScrollTrigger);
+
+        ScrollTrigger.scrollerProxy(document.documentElement, {
+          scrollTop(value) {
+            return arguments.length
+              ? lenis.scrollTo(value, {immediate: true})
+              : lenis.scroll;
+          },
+          getBoundingClientRect() {
+            return {
+              top: 0,
+              left: 0,
+              width: window.innerWidth,
+              height: window.innerHeight
+            };
+          },
+          pinType: document.documentElement.style.transform ? "transform" : "fixed"
+        });
+
+        // 3. RAF loop — IMPORTANT: update ScrollTrigger here
+        function raf(time) {
+          lenis.raf(time);
+          ScrollTrigger.update();
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // 4. Header show/hide logic
+        const header = document.querySelector("header");
+        lenis.on("scroll", ({ scroll, direction, limit }) => {
+          const scrollPercentage = (scroll / limit) * 100;
+
+          if (scrollPercentage > 5) {
+            header.classList.add("backdrop");
+          } else {
+            header.classList.remove("backdrop");
+          }
+
+          if (scrollPercentage > 1) {
+            if (direction === 1) {
+              header.style.transform = "translateY(-100%)";
+            } else {
+              header.style.transform = "translateY(0)";
+            }
+          }
+        });
+
+        // 5. Animations
+        const mm = gsap.matchMedia();
+        mm.add("(min-width: 992px)", () => {
+          gsap.utils.toArray(".animate-img").forEach((img) => {
+            gsap.fromTo(
+              img,
+              { y: -50 },
+              {
+                y: 50,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: img,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true
+                }
+              }
+            );
+          });
+
+          gsap.utils.toArray(".animate-box-less").forEach((el) => {
+            gsap.fromTo(
+              el,
+              { y: 20 },
+              {
+                y: -20,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true
+                }
+              }
+            );
+          });
+
+          gsap.utils.toArray(".animate-box").forEach((el) => {
+            gsap.fromTo(
+              el,
+              { y: 50 },
+              {
+                y: -50,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true
+                }
+              }
+            );
+          });
+
+          gsap.utils.toArray(".animate-box-more").forEach((el) => {
+            gsap.fromTo(
+              el,
+              { y: 100 },
+              {
+                y: -200,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true
+                }
+              }
+            );
+          });
+        });
+
+        ScrollTrigger.addEventListener("refresh", () => lenis.update());
+        ScrollTrigger.refresh();
+      });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+          $(document).on("click", ".cart-open", function() {
+            console.log("Cart open clicked");
+            $(".my-cart").addClass("active");
+            $("body").addClass("js-show-ajax-cart");
+            $(".cart-backdrop").addClass("active");
+          });
+        
+          $(document).on("click", ".cart_close", function() {
+            console.log("Cart close clicked");
+            $(".my-cart").removeClass("active");
+            $("body").removeClass("js-show-ajax-cart");
+            $(".cart-backdrop").removeClass("active");
+          });
+          $(document).on("click", ".cart-backdrop", function() {
+            $(".my-cart").removeClass("active");
+            $("body").removeClass("js-show-ajax-cart");
+            $(".cart-backdrop").removeClass("active");
+          });
+        });
+        
+        document.addEventListener('liquid-ajax-cart:request-end', event => {
+          const {requestState} = event.detail;
+        
+        // If the "add to cart" request is successful
+          if (requestState.requestType === 'add' && requestState.responseData ?. ok) { // Add the CSS class to the "body" tag
+            document.body.classList.add('js-show-ajax-cart');
+          }
+           });
+    </script>
+
+    <script>
+      // Listen for the "liquid-ajax-cart:request-end" event which is fired
+      // after a Shopify Cart API Ajax request is performed
+      document.addEventListener('liquid-ajax-cart:request-end', event => {
+        const {requestState} = event.detail;
+      
+      // If the "add to cart" request is successful
+        if (requestState.requestType === 'add' && requestState.responseData ?. ok) { // Add the CSS class to the "body" tag
+          document.body.classList.add('js-show-ajax-cart');
+        }
+      });
+    </script>
+
+  </body>
+</html>

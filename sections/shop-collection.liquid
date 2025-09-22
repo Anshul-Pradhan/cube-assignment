@@ -1,0 +1,72 @@
+<div class="shop-collection">
+  <div class="container-fluid">
+    <div class="sc-wrapper">
+      {% if section.settings.head %}
+        <div class="head center">
+          <h2>{{ section.settings.head }}</h2>
+          {% if section.settings.txt %}
+            <p>{{ section.settings.txt }}</p>
+          {% endif %}
+        </div>
+      {% endif %}
+      <div class="sc-grid">
+        <div class="owl-theme owl-carousel">
+          {% for product in section.settings.coll.products limit: 8 %}
+            <div class="item">
+              {% render 'product-card'
+                , product: product %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.shop-collection .owl-carousel').owlCarousel({
+            loop:true,
+            dots: false,
+            margin:24,
+            nav:true,
+            items:4,
+            navText: [
+                  "<img src='{{ 'left-arrow.svg' |  asset_url }}' />",
+                  "<img src='{{ 'right-arrow.svg' |  asset_url }}' />"
+            ],
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items: 4
+                }
+            }
+        })
+    })
+</script>
+
+{% schema %}
+  {
+    "name": "Shop by Collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "head",
+        "label": "Heading"
+      }, {
+        "type": "textarea",
+        "id": "txt",
+        "label": "Sub Heading"
+      }, {
+        "type": "collection",
+        "id": "coll",
+        "label": "Select Collection"
+      }
+    ]
+  }
+{% endschema %}

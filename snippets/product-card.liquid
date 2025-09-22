@@ -1,0 +1,21 @@
+<a href="{{ product.url }}" class="product-card">
+  <div class="sc-img pos-rel">
+    {% if product.images.size > 0 %}
+      <img
+        src="{{ product.images[0] | img_url: 'master' }}"
+        alt="{{ product.images[0].alt | escape }}"
+        class="img ab first">
+    {% endif %}
+
+    {% if product.images.size > 1 %}
+      <img
+        src="{{ product.images[1] | img_url: 'master' }}"
+        alt="{{ product.images[1].alt | escape }}"
+        class="img ab second">
+    {% endif %}
+  </div>
+  <div class="sc-txt">
+    <h3 class="sct-title">{{ product.title }}</h3>
+    <p class="sct-price">Price: {{ product.price | money_with_currency }}</p>
+  </div>
+</a>

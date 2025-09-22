@@ -1,0 +1,122 @@
+<header>
+  <div class="container-fluid">
+    <div class="nav-con">
+      <div class="nav-body">
+        <a href="{{ shop.url }}" class="nav-logo">
+          <img
+            src="{{ section.settings.select_logo |  img_url: 'master' }}"
+            alt=""
+            class="icon">
+        </a>
+        <div class="nav-content">
+          {% for link in section.settings.menu.links %}
+            {% if link.links != blank %}
+              <div class="nav-dropdown">
+                <a href="javscript:void(0)" class="nav-link dropdown parent">{{ link.title }} {% render 'icon-dd' %}</a>
+                <div class="nd-ab" data-lenis-prevent>
+                  {% for childlink in link.links %}
+                    {% if childlink.links != blank %}
+                      <div class="sub-dropdown">
+                        <a href="javscript:void(0)" class="nav-link dropdown">{{ childlink.title }} {% render 'icon-dd' %}</a>
+                        <div class="sd-in">
+                          <div class="sd-flex">
+                            {% for sublink in childlink.links %}
+                              <a href="{{ sublink.url }}" class="nav-link">{{ sublink.title }}</a>
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </div>
+                    {% else %}
+                      <a href="{{ childlink.url }}" class="nav-link">
+                        {{ childlink.title }}
+                      </a>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <a href="{{ link.url }}" class="nav-link">{{ link.title }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="nav-store">
+          <div class="search-button">
+            {% render 'icon-search' %}
+          </div>
+          <div class="cart">
+            <a href="javascript:void(0)" class="cart-open">
+              {% render 'icon-bag' %}
+
+            </a>
+            {% if cart.item_count > 0 %}
+              <span data-ajax-cart-bind="item_count" class="header__cart-quantity">
+                {{ cart.item_count }}
+              </span>
+            {% else %}
+            {% endif %}
+
+          </div>
+          <div class="mob-menu">
+            {% render 'hamburger' %}
+          </div>
+          {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <a href="/account">account</a>
+              {{ 'Log Out' | customer_logout_link | replace: '<a', '<a' }}
+            {% else %}
+              {{ 'Log In' | customer_login_link | replace: '<a', '<a' }}
+              {{ 'Register' | customer_register_link | replace: '<a', '<a' }}
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  $(document).ready(function(){
+    $(".sub-dropdown").click(function(e){
+      e.stopPropagation();
+
+      const $clicked = $(this).children(".sd-in");
+
+      // Close all other dropdowns
+      $(".sd-in").not($clicked).slideUp();
+
+      // Toggle the clicked one
+      $clicked.slideToggle();
+    });
+
+    $(".mob-menu").click(function(){
+      $(this).toggleClass('active');
+      $(".nav-content").toggleClass('active');
+    });
+
+    if ($(window).width() < 991) {
+      $(".nav-link.parent").click(function(e){
+        e.stopPropagation();
+        $(".nd-ab").toggleClass('active');
+      })
+    }
+  });
+
+</script>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "default": "main-menu",
+        "label": "Heading Navigation Menu"
+      }, {
+        "type": "image_picker",
+        "id": "select_logo",
+        "label": "Change Logo"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,82 @@
+<div class="cart-backdrop"></div>
+<div class="my-cart">
+
+  <div class="my-cart-in" data-ajax-cart-section='cart-items'>
+    <div class="cart-head">
+      <h3 class="desk">Your Cart</h3>
+      <div class="cart_close">
+        {% render 'icon-cross-cart' %}
+      </div>
+    </div>
+    <div class="cart-inner" data-lenis-prevent>
+      <div class="top">
+        {% if cart.item_count > 0 %}
+          <div class="my-cart__items">
+
+            <!-- Loop through cart items -->
+            {% for line_item in cart.items %}
+              {% assign line_item_index = forloop.index %}
+              <div class="product-cart-card">
+                <div class="left">
+                  <img
+                    class="img"
+                    src="{{ line_item.image | img_url: 'master' }}"
+                    alt="{{ item.title }}">
+                </div>
+                <div class="right">
+                  <h4 href="{{ line_item.url }}">{{ line_item.product.title | escape }}</h4>
+                  <h4 class="price">Price: {{ line_item.final_price | money }}</h4>
+                  <!-- "Remove item" button -->
+                  <a
+                    class="cart-product-remove"
+                    data-ajax-cart-request-button
+                    href="{{ line_item.url_to_remove }}">
+                    {% render 'icon-trash' %}
+                  </a>
+                </div>
+              </div>
+
+            {% endfor %}
+          </div>
+        {% else %}
+          <h3 class="empty-head desk">Your Cart Is Empty</h3>
+        {% endif %}
+      </div>
+      <div class="bottom">
+        {% if cart.item_count > 0 %}
+          {% form 'cart'
+            , cart
+            , id: 'my-ajax-cart-form' %}
+            <div class="subtotal">
+              <h4>
+                Subtotal</h4>
+              <h4>{{ cart.total_price | money_with_currency }}</h4>
+            </div>
+            <button
+              type="submit"
+              class="custom-btn dark"
+              name="checkout">
+              proceed to checkout
+            </button>
+            <button
+              type="submit"
+              class="custom-btn lined"
+              name="checkout">
+              Continue Shopping
+            </button>
+          {% endform %}
+        {% else %}
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</div>
+{% schema %}
+  {
+
+    "name": "Cart Drawer",
+    "settings": []
+
+  }
+{% endschema %}

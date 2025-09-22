@@ -1,0 +1,57 @@
+<div class="newsletter-section">
+  <div class="container-fluid">
+    <div class="ns-wrapper">
+      <div class="head center">
+        <h2 class="white">{{ section.settings.head }}</h2>
+        {% if section.settings.txt %}
+          <p class="white">{{ section.settings.txt }}</p>
+        {% endif %}
+      </div>
+      <div class="ns-form">
+        {% form 'customer' %}
+          <div class="form-in">
+            <div class="email_input">
+              <input
+                type="email"
+                name="contact[email]"
+                class=""
+                placeholder="Enter Email Address"
+                required>
+            </div>
+            <div class="submit_btn">
+              <button type="submit" class="custom-btn white">Subscribe</button>
+            </div>
+          </div>
+          {% if form.posted_successfully? %}
+            <script>
+              window.location.href = '/pages/thankyou';
+            </script>
+          {% elsif form.errors %}
+            <div class="form-error">
+              <p>There was an error submitting the form. Please check your email address and try again.</p>
+            </div>
+          {% endif %}
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Newsletter",
+    "tag": "section",
+    "class": "newsletterSection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "head",
+        "label": "Heading"
+      }, {
+        "type": "textarea",
+        "id": "txt",
+        "label": "Sub Heading"
+      }
+    ]
+  }
+{% endschema %}

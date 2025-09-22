@@ -1,0 +1,75 @@
+<div class="shop-by-collection">
+  <div class="container-fluid">
+    <div class="sbc-wrapper">
+      <div class="head center">
+        <h2>{{ section.settings.head }}</h2>
+        {% if section.settings.txt %}
+          <p>{{ section.settings.txt }}</p>
+        {% endif %}
+      </div>
+      <div class="sbc-col">
+        {% for block in section.blocks %}
+          {% assign collection = block.settings.col-item %}
+          {% if collection %}
+            <a href="{{ collection.url }}" class="slider_card">
+              <div class="img_div overflow-hidden">
+                {% if block.settings.img %}
+                  <img
+                    src="{{ block.settings.img |  img_url: 'master' }}"
+                    alt="{{ collection.title }}"
+                    class="img ab animate-img">
+                {% else %}
+                  <img
+                    class="img ab animate-img"
+                    src="{{ collection.featured_image | img_url: 'master' }}"
+                    alt="{{ collection.title }}">
+                {% endif %}
+              </div>
+              <div class="content_div">
+                <div class="text">
+                  <p class="cursive_text-white">{{ collection.title }}</p>
+                </div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Shop By Collection",
+    "tag": "section",
+    "class": "shopbyCollection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "head",
+        "label": "Heading"
+      }, {
+        "type": "textarea",
+        "id": "txt",
+        "label": "Sub Heading"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "col",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "col-item",
+            "label": "Select Collection"
+          }, {
+            "type": "image_picker",
+            "id": "img",
+            "label": "Custom Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
