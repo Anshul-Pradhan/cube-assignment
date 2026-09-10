@@ -7,7 +7,7 @@
           {% for media in product.media %}
             <div class="item">
               <div class="prod-main">
-                {% render 'product-media' | media: media %}
+                {% render 'product-media', media: media %}
               </div>
             </div>
           {% endfor %}
@@ -17,7 +17,7 @@
             {% for media in product.media %}
               <div class="item">
                 <div class="prod-thumb">
-                  {% render 'product-media' | media: media %}
+                  {% render 'product-media', media: media %}
                 </div>
               </div>
             {% endfor %}
@@ -425,4 +425,16 @@
         }
       ]
     }
-  {% endschema %}
+  {% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'product-media' | media: media %}"
+  to: "{% render 'product-media', media: media %}"
+  position: 360..402
+- from: "{% render 'product-media' | media: media %}"
+  to: "{% render 'product-media', media: media %}"
+  position: 707..749
+{%- endcomment -%}

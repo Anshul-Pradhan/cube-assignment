@@ -209,9 +209,9 @@
       <div class="collection-wrapper" id="ProductGrid">
         {% paginate collection.products by section.settings.number_of_product %}
           {% for product in collection.products %}
-            {% render 'product-card' | product: product %}
+            {% render 'product-card', product: product %}
           {% endfor %}
-          {% render 'pagination' | pagination: paginate %}
+          {% render 'pagination', pagination: paginate %}
         {% endpaginate %}
       </div>
     </div>
@@ -395,4 +395,16 @@
       }
     ]
   }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'product-card' | product: product %}"
+  to: "{% render 'product-card', product: product %}"
+  position: 14393..14438
+- from: "{% render 'pagination' | pagination: paginate %}"
+  to: "{% render 'pagination', pagination: paginate %}"
+  position: 14472..14519
+{%- endcomment -%}
